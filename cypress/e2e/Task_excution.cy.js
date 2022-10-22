@@ -3,12 +3,12 @@ import HomePage from "../Pages/HomePage.cy.js"
 import ItemDetailsPage from "../Pages/ItemDetailsPage.cy.js"
 import CartPage from "../Pages/CartPage.cy.js"
 describe('empty spec', () => {
-  before(() => {
+  beforeEach(() => {
       HomePage.NavigateDemoblaze()
     
   
   })
-  it('Should Login Successsfully', () => {
+  it('Check Login and added Item to cart', () => {
     
     LoginPage.OpenLoginPage()
     LoginPage.InsertUserName('a')
@@ -25,15 +25,14 @@ describe('empty spec', () => {
    
 
   })
-  it('second testCase', () => {
+  it('Check added item to th cart correct', () => {
    let FirstItem={
-      
-      Name: 'Nokia lumia 1520',
-    Price: 820}
-   let SecondItem={
-      
-      Name: 'Samsung galaxy s6',
+    Name: 'Samsung galaxy s6',
     Price: 360}
+   let SecondItem={
+    Name: 'Nokia lumia 1520',
+
+    Price: 820}
 
     HomePage.OpenHomePage()
     LoginPage.OpenLoginPage()
@@ -50,4 +49,24 @@ describe('empty spec', () => {
 
  
   })
+  it('Check Checkout Cart', () => {
+    let Name = 'Mohamed'
+    let Country= 'Egypt'
+    let city = 'Cairo'
+    let month = 'Jane'
+    let year  = "1996"
+    let card =  '123345678912345'
+    LoginPage.OpenLoginPage()
+    LoginPage.InsertUserName('a')
+    LoginPage.InsertPassword('a')
+    LoginPage.ClickOnLogin()
+    HomePage.LoginValidation()
+    HomePage.OpenCartPage()
+  CartPage.PlaceOrder()
+  CartPage.FillPurchaseForm(Name,Country,city,card,month,year)
+  CartPage.Purchase()
+ CartPage.Validatepurchase(Name,card)
+  CartPage.PurchaseOkClick()
+  HomePage.CheckHomePage()
+   })
 })

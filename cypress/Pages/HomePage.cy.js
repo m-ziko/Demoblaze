@@ -1,11 +1,9 @@
 class HomePage{
     elements = {
 WelcomeUser:()=> cy.get('#nameofuser'),
-//ItemInsertedToCard:()=>cy.get('.card-title').contains('Samsung galaxy s6'),
-SecondItemInsertedToCard:()=>cy.get(':nth-child(1) > .card > .card-block > .card-title > .hrefch'),
 HomePageButton:()=>cy.get('.active > .nav-link'),
-CartPageButton:()=>cy.get('#cartur')
-
+CartPageButton:()=>cy.get('#cartur'),
+HomePageNavBar:()=>cy.get('.active > .d-block')
     }
     NavigateDemoblaze(){
         cy.visit('https://www.demoblaze.com/index.html')
@@ -28,6 +26,8 @@ OpenCartPage(){
         this.elements.CartPageButton().click()
         cy.wait(2000)
       }
-    
+CheckHomePage(){
+  this.elements.HomePageNavBar().should('be.visible')
+}
 }
 module.exports = new HomePage();
